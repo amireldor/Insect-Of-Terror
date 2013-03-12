@@ -10,17 +10,17 @@ class SceneStack(list):
     def next(self):
         return self.pop(0)
 
-    def update_head(self, dt):
-        self.head().update(dt)
-
 class Scene(Model):
-    """Base class for a Scene. A scene is that you see on the screen at a time such as Main Menu, Game, etc..."""
+    """
+    Base class for a Scene. A scene is that you see on the screen at a time such as Main Menu, Game, etc...
+    """
+    # TODO: tell more stories in the doc
 
-    def __init__(self, stack=None):
+    def __init__(self):
         Model.__init__(self)
 
         self.models = []
-        self.stack = stack
+        self.ended = False # did scene end?
 
     def append_model(self, model):
         if isinstance(model, collections.Iterable):
@@ -31,5 +31,17 @@ class Scene(Model):
     def get_models(self):
         return self.models
 
+    def process_event(self, event):
+        pass
+
     def update(self, dt):
         pass
+
+    def render(self, screen):
+        pass
+
+    def end_scene(self):
+        self.ended = True
+
+    def has_ended(self):
+        return self.ended

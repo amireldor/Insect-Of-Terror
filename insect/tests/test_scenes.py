@@ -27,6 +27,7 @@ class SceneB(SceneWithNumber):
         SceneWithNumber.__init__(self)
         self.number = 10
 
+# TODO: I don't check the styack.next() properly, it should use the `has_ended()` and `end_scene()` Scene methods
 class SceneStackTests(unittest.TestCase):
 
     def setUp(self):
@@ -48,11 +49,11 @@ class SceneStackTests(unittest.TestCase):
     def test_update(self):
         dt = 1 # meaningless `dt` value
 
-        self.stack.update_head(dt)
+        self.stack.head().update(dt)
         self.assertEqual(self.stack.head().get_number(), 1)
         self.stack.next()
 
-        self.stack.update_head(dt)
+        self.stack.head().update(dt)
         self.assertEqual(self.stack.head().get_number(), 11) # Scene B
 
 class SceneTests(unittest.TestCase):
