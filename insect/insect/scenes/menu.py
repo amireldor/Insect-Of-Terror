@@ -10,6 +10,8 @@ from insect.conf import conf
 from game.scenes import Scene
 from insect.models.roach import Roach
 
+from game.views import OneImageView
+
 class Menu(Scene):
 
     def __init__(self):
@@ -19,12 +21,15 @@ class Menu(Scene):
         for x in xrange(conf.menu.roaches):
             new_roach = Roach()
 
-            new_roach.set_position( [random() * conf.world.dimensions[0], random() * conf.world.dimensions[1]] )
+            #new_roach.set_position( [random() * conf.world.dimensions[0], random() * conf.world.dimensions[1]] )
+            new_roach.set_position( [random() * conf.world.dimensions[0], 500] )
             new_roach.set_rotation( random() * 360 )
 
             self.roaches.append(new_roach)
 
         self.append_model(self.roaches)
+
+        self.roach_view = OneImageView(conf.images.test)
 
     def process_event(self, event):
         Scene.process_event(self, event)
@@ -41,4 +46,7 @@ class Menu(Scene):
 
     def render(self, screen):
         Scene.render(self, screen)
-        screen.fill( (255, 0, 0) )
+        screen.fill( (0, 128, 255) )
+
+        for roach in self.roaches:
+            self.roach_view.render(roach, screen)

@@ -14,7 +14,8 @@ def main():
     screen = pygame.display.set_mode( conf.window.dimensions )
 
     stack = SceneStack()
-    stack += [ splash.Splash(), menu.Menu() ]
+    #stack += [ splash.Splash(), menu.Menu() ]
+    stack.append( menu.Menu() )
 
     run = True
     while (len(stack)):

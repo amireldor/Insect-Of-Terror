@@ -9,3 +9,6 @@ class conf():
 
     class menu():
         roaches = 3
+
+    class images():
+        test = 'images/test.png'
